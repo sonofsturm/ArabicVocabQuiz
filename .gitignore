@@ -1,0 +1,30 @@
+## Ignore Visual Studio temporary files, build outputs, and user-specific files
+/.vs/
+/.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build folders
+/bin/
+/obj/
+
+# Node
+/node_modules/
+
+# Mac
+.DS_Store
+
+# Logs
+.log
+
+# Composer / PHP vendor
+/vendor/
+
+# OS generated
+Thumbs.db
+ehthumbs.db
+
+# IDE workspace
+.idea/

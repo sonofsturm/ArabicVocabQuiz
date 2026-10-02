@@ -1,0 +1,20 @@
+{
+  "name": "Arabic Vocab Quiz",
+  "short_name": "ArabicQuiz",
+  "start_url": "index.php",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "img/arabic_icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/arabic_icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

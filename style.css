@@ -1,0 +1,619 @@
+/* ===============================
+   LOAD ARABIC FONT
+   =============================== */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&display=swap');
+
+/* ===============================
+   BASE LAYOUT
+   =============================== */
+
+:root {
+    /* top bar spacing - adjusted for mobile when menu expands */
+    /* reduced slightly to match the visual header used across breakpoints */
+    --topbar-height: 72px;
+}
+
+/* For medium/narrow viewports increase the reserved top spacing because
+   the header can grow (links, wrapped text, larger font) and we don't
+   want the page title or content to be covered. */
+@media (max-width: 1000px) {
+    :root { --topbar-height: 96px; }
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    /* ensure page content sits below the fixed top bar; variable adjusts in media queries */
+    padding-top: var(--topbar-height);
+
+    font-family: Arial, sans-serif;
+}
+
+/* Ensure hamburger is hidden on wider (desktop) screens */
+@media (min-width: 769px) {
+    #hamburger {
+        display: none !important;
+    }
+}
+
+/* Strong override in case other layout rules affect placement */
+@media (max-width: 768px) {
+    #hamburger {
+        display: block !important;
+        position: fixed !important;
+        right: 12px !important;
+        top: 8px !important;
+        margin: 0 !important;
+        transform: none !important;
+        z-index: 99999 !important;
+    }
+}
+
+/* Ensure the hamburger button doesn't inherit full-width mobile button styles */
+@media (max-width: 768px) {
+    #hamburger {
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        height: auto !important;
+        padding: 6px 10px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+}
+
+.quiz-container {
+    text-align: center;
+    width: 400px;
+}
+
+/* ===============================
+   TOP BAR
+   =============================== */
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    z-index: 1000;
+    background: white !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.nav-left, .nav-right { display: flex; align-items: center; gap: 12px; }
+.nav-right { margin-left: auto; }
+.nav-left .home-link { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #0066cc; text-decoration: none; }
+.nav-left .home-link img.home-img { width: 28px; height: 28px; display: block; }
+.nav-left .home-link .home-text { display: inline-block; }
+.nav-left .welcome-inline { margin-left: 8px; color: #333; }
+
+/* screen-reader only utility */
+.sr-only { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
+
+/* Ensure the site navigation order is left-to-right even on RTL pages
+   so header links keep a consistent, expected order (Home first). */
+.top-bar, .top-bar .menu {
+    direction: ltr;
+}
+
+.top-bar a {
+    text-decoration: none;
+    color: #0066cc;
+    font-weight: bold;
+}
+
+.top-bar a:hover {
+    text-decoration: underline;
+}
+
+/* Hamburger & responsive menu */
+#hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 6px 10px;
+}
+
+.top-bar .menu {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.top-bar .menu .welcome-text {
+    margin-right: 8px;
+    color: #333;
+    font-weight: normal;
+}
+
+/* Welcome spot (upper-left) */
+.welcome-spot {
+    position: fixed;
+    top: 10px;
+    left: 12px;
+    z-index: 1102;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    background: rgba(255,255,255,0.0);
+    padding: 4px 6px;
+}
+
+@media (max-width: 420px) {
+    .welcome-spot {
+        font-size: 14px;
+    }
+}
+
+/* mobile: hide menu by default and show hamburger */
+@media (max-width: 768px) {
+    #hamburger {
+        display: block;
+        position: fixed; /* ensure it's pinned to the viewport */
+        right: 12px;
+        top: 8px;
+        z-index: 1100;
+    }
+
+    .top-bar .menu {
+        display: none;
+    }
+
+    .top-bar .menu.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        right: 12px;
+        top: 48px;
+        background: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        z-index: 1090;
+        min-width: 160px;
+    }
+
+    .top-bar .menu a {
+        padding: 8px 6px;
+        display: block;
+        color: #0066cc;
+    }
+}
+
+/* ===============================
+   DEFAULT FORM CONTROLS
+   =============================== */
+
+input,
+button,
+select {
+    padding: 8px;
+    font-size: 16px;
+}
+
+button {
+    margin: 5px;
+    cursor: pointer;
+}
+
+/* ===============================
+   ARABIC TEXT
+   =============================== */
+
+.arabic-text {
+    font-family: "Amiri", sans-serif;
+    font-size: 36px;
+    direction: rtl;
+    letter-spacing: 0.02em;
+    line-height: 1.7;
+}
+
+h2.arabic-text {
+    font-size: 36px;
+}
+
+input.arabic-text {
+    text-align: right;
+
+    font-family: "Amiri", serif;
+    font-size: 36px;
+
+    direction: rtl;
+
+    color: green;
+
+    font-weight: bold;
+    
+    border: 2px solid green;
+    
+    width: 400px;
+    
+    padding: 10px;
+    
+    background-color: #f8fff8;
+}
+
+.answer-box.arabic-text {
+    text-align: right;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    min-width: 150px;
+}
+
+/* ===============================
+   ENGLISH TEXT
+   =============================== */
+
+.english-text {
+    direction: ltr;
+    font-size: 28px; /* reduced from 36px for better hierarchy */
+    line-height: 1.3;
+}
+
+@media (max-width: 768px) {
+    .english-text {
+        font-size: 20px; /* smaller on mobile */
+    }
+}
+
+/* ===============================
+   FEEDBACK COLORS
+   =============================== */
+
+.feedback {
+    margin-top: 15px;
+}
+
+.red-text {
+    color: red;
+}
+
+.green-text {
+    color: green;
+}
+
+/* ===============================
+   ENV INDICATOR
+   =============================== */
+
+.env-indicator {
+    position: fixed;
+    top: 6px;
+    left: 8px;
+    font-size: 12px;
+    font-family: monospace;
+    color: #888;
+    opacity: 0.7;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.study-info {
+    margin-bottom: 20px;
+    padding: 10px;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    background-color: #f8f8f8;
+
+    display: inline-block;
+}
+
+.study-info .arabic-text {
+    font-size: 28px;
+}
+
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.lesson-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    background: #fff;
+}
+
+.lesson-card h3 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.lesson-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* =====================================
+   Study Queue Sidebar Card
+===================================== */
+
+.study-queue-card {
+    position: fixed;
+    top: 120px;
+    right: 20px;
+
+    width: 220px;
+
+    padding: 15px;
+
+    background-color: #f8f8f8;
+
+    border: 1px solid #ccc;
+    border-radius: 10px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+    z-index: 1000;
+}
+
+.study-queue-card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+
+    text-align: center;
+}
+
+.queue-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+    font-size: 16px;
+}
+
+.account-nav {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+@media (max-width: 768px) {
+
+    .quiz-container {
+        width: 100%;
+        max-width: 400px;
+        padding: 0 15px;
+        box-sizing: border-box;
+    }
+
+    input.arabic-text {
+        width: 100%;
+        max-width: 400px;
+        box-sizing: border-box;
+    }
+
+    .study-queue-card {
+        position: static !important;
+
+        width: 90%;
+        max-width: 320px;
+
+        margin: 15px auto;
+
+        z-index: auto;
+    }
+
+    .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        display: flex;
+        /* keep home and menu separated on mobile to avoid overlaying page content */
+        justify-content: space-between;
+        gap: 12px;
+
+        padding: 8px 12px;
+
+        background: white;
+
+        z-index: 1000;
+    }
+
+/* ensure a predictable header height so content doesn't slip under it
+   on responsive viewports where links could otherwise wrap and grow the bar */
+.top-bar {
+    min-height: var(--topbar-height);
+    align-items: center;
+}
+
+/* keep menu items on a single line and slightly smaller so they don't
+   force the top-bar to expand and overlap the page title */
+.top-bar .menu {
+    align-items: center;
+    white-space: nowrap;
+}
+.top-bar .menu a {
+    font-size: 14px;
+}
+
+/* hide the Home text on narrower viewports to free space for the menu */
+@media (max-width: 900px) {
+    .nav-left .home-text { display: none; }
+}
+
+    .lessons-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lesson-card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    button,
+    select {
+        width: 100%;
+        font-size: 18px;
+        min-height: 48px;
+    }
+    
+    .games-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 15px;
+        box-sizing: border-box;
+    }    
+    
+}
+
+.study-info .arabic-text.drill-answer-text {
+    font-size: 36px;
+}
+
+.form-pattern-wrap {
+    font-size: 36px;
+}
+
+/* Alphabet page layout */
+.alphabet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.alpha-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    background: #fff;
+    text-align: center;
+    cursor: pointer;
+    transition: box-shadow .12s ease, transform .08s ease;
+}
+
+/* Wider container for alphabet pages so more columns fit on desktop */
+.alphabet-page.quiz-container {
+    width: auto;
+    max-width: 1100px;
+}
+
+.alpha-card:focus,
+.alpha-card:hover {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transform: translateY(-3px);
+    outline: none;
+}
+
+.alpha-card.speaking {
+    box-shadow: 0 8px 22px rgba(0,128,0,0.12);
+    border-color: #2ecc71;
+}
+
+.alpha-card.active {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.12);
+}
+
+.alpha-letter {
+    /* Use the same Arabic styling as other pages */
+    font-family: "Amiri", sans-serif;
+    font-size: 36px; /* match .arabic-text */
+    line-height: 1.7;
+    direction: rtl;
+    margin-bottom: 6px;
+}
+
+.alpha-name {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.alpha-forms {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    font-size: 18px;
+}
+
+.alpha-forms .form {
+    margin-top: 6px;
+    /* ensure joining forms use the same Arabic font and size */
+    font-family: "Amiri", sans-serif;
+    font-size: 36px;
+    direction: rtl;
+}
+
+/* Make Arabic letters green like other pages */
+.alpha-letter,
+.alpha-forms .form {
+    color: green;
+}
+
+@media (max-width: 420px) {
+    .alpha-letter { font-size: 36px; }
+    .alpha-forms { font-size: 16px; }
+}
+
+/* Quiz styles */
+.quiz-controls { margin-top: 20px; text-align: center; }
+.quiz-options { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px; }
+.option-btn { padding: 8px 12px; min-width: 100px; border: 1px solid #ccc; background: #fff; cursor: pointer; border-radius: 6px; }
+.option-btn:disabled { opacity: 0.7; cursor: default; }
+.quiz-feedback { margin-top: 10px; font-weight: 600; }
+.quiz-progress { margin-top: 8px; color: #666; }
+
+/* Footer styling */
+.site-footer {
+    margin-top: 28px;
+    padding: 12px 0;
+    background: #f8f8f8;
+    border-top: 1px solid #e6e6e6;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 500;
+}
+.site-footer .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+}
+.quiz-container { padding-bottom: 70px; }
+.site-footer a { color: #0066cc; text-decoration: none; font-weight: bold; margin: 0 6px; }
+.site-footer a:hover { text-decoration: underline; }
+
+.games-container {
+    text-align: left;
+    width: 90%;
+    max-width: 1000px;
+}
+
+.games-container h1,
+.games-container h2 {
+    text-align: center;
+}
