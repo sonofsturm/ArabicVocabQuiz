@@ -13,6 +13,9 @@ $isLoggedIn = isset($_SESSION['user_id']);
             <img src="img/arabic_icon.png" alt="Home" class="home-img">
             <span class="home-text">Home</span>
         </a>
+        <?php if ($isLoggedIn): ?>
+            <span class="welcome-inline">Welcome, <?php echo htmlspecialchars($_SESSION['first_name']); ?></span>
+        <?php endif; ?>
     </div>
 
     <div class="nav-right">
