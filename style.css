@@ -97,7 +97,7 @@ body {
 .nav-left, .nav-right { display: flex; align-items: center; gap: 12px; }
 .nav-right { margin-left: auto; }
 .nav-left .home-link { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #0066cc; text-decoration: none; }
-.nav-left .home-link img.home-img { width: 28px; height: 28px; display: block; }
+.nav-left .home-link img.home-img { width: 28px; height: 28px; display: block; margin-right: 6px; vertical-align: middle; }
 .nav-left .home-link .home-text { display: inline-block; }
 .nav-left .welcome-inline { margin-left: 8px; color: #333; }
 
