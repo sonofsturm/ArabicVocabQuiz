@@ -94,12 +94,41 @@ function normalizeArabicAnswer(string $text): string
     return trim($normalized);
 }
 
+// More aggressive normalization for typed answers: also normalize alef/ya/waw variants
+function normalizeArabicLoose(string $text): string
+{
+    $n = normalizeArabicAnswer($text);
+
+    // Normalize common letter variants to a single form for comparison
+    $replacements = [
+        '\u{0622}' => '\u{0627}', // ALEF WITH MADDA -> ALEF
+        '\u{0623}' => '\u{0627}', // ALEF WITH HAMZA ABOVE -> ALEF
+        '\u{0625}' => '\u{0627}', // ALEF WITH HAMZA BELOW -> ALEF
+        '\u{0626}' => '\u{064A}', // YEH WITH HAMZA -> YEH
+        '\u{0624}' => '\u{0648}', // WAW WITH HAMZA -> WAW
+        '\u{06CC}' => '\u{064A}', // FARSI YEH -> YEH
+    ];
+
+    $n = str_replace(array_keys($replacements), array_values($replacements), $n);
+
+    // collapse whitespace
+    $n = preg_replace('/\s+/u', '', $n);
+
+    return $n;
+}
+
 function checkTypedAnswer(string $userAnswer, string $correctAnswer): bool
 {
+    // First try strict comparison (preserve shadda differences)
     $normalizedUser = normalizeArabicAnswer($userAnswer);
     $normalizedCorrect = normalizeArabicAnswer($correctAnswer);
+    if ($normalizedUser === $normalizedCorrect) return true;
 
-    return $normalizedUser === $normalizedCorrect;
+    // Fall back to looser normalization that ignores minor orthographic variants
+    $looseUser = normalizeArabicLoose($userAnswer);
+    $looseCorrect = normalizeArabicLoose($correctAnswer);
+
+    return $looseUser === $looseCorrect;
 }
 
 // ----------------------------------------

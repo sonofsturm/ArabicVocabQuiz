@@ -1,6 +1,15 @@
  <?php
 
 $isLoggedIn = isset($_SESSION['user_id']);
+$scriptDirFs = realpath(dirname($_SERVER['SCRIPT_FILENAME'] ?? ''));
+$headerDirFs = realpath(__DIR__);
+$prefix = '';
+if ($scriptDirFs && $headerDirFs && strpos($scriptDirFs, $headerDirFs) === 0) {
+    $relativePath = trim(substr($scriptDirFs, strlen($headerDirFs)), DIRECTORY_SEPARATOR);
+    if ($relativePath !== '') {
+        $prefix = str_repeat('../', substr_count($relativePath, DIRECTORY_SEPARATOR) + 1);
+    }
+}
 
 ?>
 
@@ -9,8 +18,8 @@ $isLoggedIn = isset($_SESSION['user_id']);
 <div class="top-bar">
 
     <div class="nav-left">
-        <a class="home-link" href="index.php" aria-label="Home">
-            <img src="img/arabic_icon.png" alt="Home" class="home-img">
+        <a class="home-link" href="<?php echo $prefix; ?>index.php" aria-label="Home">
+            <img src="<?php echo $prefix; ?>img/arabic_icon.png" alt="Home" class="home-img">
             <span class="home-text">Home</span>
         </a>
         <?php if ($isLoggedIn): ?>
@@ -26,6 +35,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
             <a href="account.php">Account</a>
             <a href="alphabet.php">Alphabet</a>
             <a href="alphabet_quiz.php">Alphabet Quiz</a>
+            <a href="<?php echo $prefix; ?>games/verb_forms.php">Verb Forms</a>
             <?php if (($_SESSION['role'] ?? '') === 'admin'): ?>
             <a href="admin_users.php">Admin Users</a>
             <?php endif; ?>
@@ -44,6 +54,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
             <?php endif; ?>
             <a href="alphabet.php">Alphabet</a>
             <a href="alphabet_quiz.php">Alphabet Quiz</a>
+            <a href="<?php echo $prefix; ?>games/verb_forms.php">Verb Forms</a>
 
         <?php endif; ?>
 

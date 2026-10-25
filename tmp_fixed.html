@@ -1,0 +1,510 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Verb Forms</title>
+    <link rel="stylesheet" href="../style.css?v=9">
+</head>
+<body>
+ 
+<button id="hamburger" aria-label="Menu" aria-expanded="false" style="position:fixed; right:12px; top:8px; z-index:99999;">â˜°</button>
+
+<div class="top-bar">
+
+    <div class="nav-left">
+        <a class="home-link" href="index.php" aria-label="Home">
+            <img src="img/arabic_icon.png" alt="Home" class="home-img">
+            <span class="home-text">Home</span>
+        </a>
+            </div>
+
+    <div class="nav-right">
+        <nav class="menu" aria-label="Main menu">
+
+        
+                            <a href="login.php">Login</a>
+            
+                            <a href="register.php">Create Account</a>
+                        <a href="alphabet.php">Alphabet</a>
+            <a href="alphabet_quiz.php">Alphabet Quiz</a>
+
+        
+        </nav>
+    </div>
+
+</div>
+
+<script>
+// Simple hamburger toggle: adds/removes 'open' class on the menu and updates aria-expanded
+(function(){
+    var btn = document.getElementById('hamburger');
+    var menu = document.querySelector('.top-bar .menu');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', function(){
+        var isOpen = menu.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    // close menu when clicking outside on small screens
+    document.addEventListener('click', function(e){
+        if (!menu.contains(e.target) && e.target !== btn) {
+            if (menu.classList.contains('open')) {
+                menu.classList.remove('open');
+                btn.setAttribute('aria-expanded','false');
+            }
+        }
+    });
+})();
+</script>
+
+<script>
+// Ensure the hamburger is a direct child of body and pinned to the viewport.
+// This works around layout/transform issues where fixed positioning becomes relative to an ancestor.
+(function(){
+    var btn = document.getElementById('hamburger');
+    if (!btn) return;
+    // move to body if not already
+    if (btn.parentNode !== document.body) {
+        document.body.appendChild(btn);
+    }
+    // enforce fixed placement
+    btn.style.position = 'fixed';
+    btn.style.right = '12px';
+    btn.style.top = '8px';
+    btn.style.zIndex = '99999';
+    btn.style.margin = '0';
+})();
+</script>
+
+<script>
+// Show/hide hamburger based on viewport width to ensure it does not appear on desktop
+(function(){
+    var btn = document.getElementById('hamburger');
+    if(!btn) return;
+    function update(){
+        if(window.innerWidth >= 769){
+            btn.style.display = 'none';
+        } else {
+            btn.style.display = 'block';
+        }
+    }
+    update();
+    window.addEventListener('resize', update);
+})();
+</script>
+
+<script>
+// Adjust body padding to match the actual height of the fixed top-bar.
+// Call again after fonts load and with a small delay to handle layout shifts.
+(function(){
+    function adjustBodyPadding(){
+        var top = document.querySelector('.top-bar');
+        if(!top) return;
+        var rect = top.getBoundingClientRect();
+        var h = Math.ceil(rect.height || (rect.bottom - rect.top));
+        // add a small buffer so large page titles don't touch the header
+        var buffer = 8;
+        document.body.style.paddingTop = (h + buffer) + 'px';
+    }
+
+    // Run at key moments
+    window.addEventListener('load', function(){ adjustBodyPadding(); setTimeout(adjustBodyPadding, 300); });
+    window.addEventListener('resize', adjustBodyPadding);
+
+    // When fonts finish loading they can change header height
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function(){ setTimeout(adjustBodyPadding, 100); });
+    }
+
+    var btn = document.getElementById('hamburger');
+    if(btn){
+        btn.addEventListener('click', function(){ setTimeout(adjustBodyPadding, 220); });
+    }
+
+    var menu = document.querySelector('.top-bar .menu');
+    if(menu && typeof MutationObserver !== 'undefined'){
+        new MutationObserver(function(){ setTimeout(adjustBodyPadding, 50); }).observe(menu, { attributes: true, childList: true, subtree: true });
+    }
+
+    // initial attempt immediately
+    adjustBodyPadding();
+    // another small delayed attempt to catch late layout shifts
+    setTimeout(adjustBodyPadding, 600);
+})();
+</script>
+
+
+<div class="games-container">
+
+    <h1>Verb Forms (§Ù„£Ùˆ²§Ù†)</h1>
+
+    <p>
+        <a href="?view=concept">Learn the Forms</a>
+        &nbsp;|&nbsp;
+        <a href="?view=study">Study &amp; Practice</a>
+        &nbsp;|&nbsp;
+        <a href="?view=identify">Identify the Form</a>
+        &nbsp;|&nbsp;
+        <a href="?view=produce">Produce the Conjugation</a>
+    </p>
+
+
+        <p>
+            Arabic verbs are built from a three-letter root
+            (like Ùƒ-ª-¨, "writing") that gets slotted into one
+            of several patterns, called <strong>Forms</strong>.
+            Each Form applies a consistent shape to the root and
+            often shifts the meaning in a predictable direction.
+        </p>
+
+        <p>
+            Not every root has an attested word in every Form -
+            that is normal, not a gap in this page. The table
+            below only shows real, commonly used words.
+        </p>
+
+        <h2>What Actually Changes</h2>
+
+        <p>
+            Every Form starts from the same three root letters.
+            Here is exactly what gets added or changed to build
+            each one, before you look at real examples below.
+        </p>
+
+        
+        <div class="study-info">
+
+            
+                <strong>Form I</strong>
+                <span class="form-pattern-wrap">
+                    ( <span class="arabic-text green-text drill-answer-text">ÙÙŽ¹ÙŽÙ„ÙŽ</span> )
+                </span>:
+
+                <span class="pattern-change">
+                                                                        the base pattern - no change applied                                                            </span>
+
+                <br><br>
+
+            
+                <strong>Form II</strong>
+                <span class="form-pattern-wrap">
+                    ( <span class="arabic-text green-text drill-answer-text">ÙÙŽ¹ÙŽÙ‘Ù„ÙŽ</span> )
+                </span>:
+
+                <span class="pattern-change">
+                                                                        the middle root letter is doubled (gemination)                                                            </span>
+
+                <br><br>
+
+            
+                <strong>Form III</strong>
+                <span class="form-pattern-wrap">
+                    ( <span class="arabic-text green-text drill-answer-text">ÙÙŽ§¹ÙŽÙ„ÙŽ</span> )
+                </span>:
+
+                <span class="pattern-change">
+                                                                        a long alif (                                                                                                <span class="arabic-text green-text drill-answer-text" style="margin:0 4px; display:inline-block;">
+                                §                            </span>
+                                                                                                ) is inserted after the FIRST root letter                                                            </span>
+
+                <br><br>
+
+            
+                <strong>Form IV</strong>
+                <span class="form-pattern-wrap">
+                    ( <span class="arabic-text green-text drill-answer-text">£ÙŽÙÙ’¹ÙŽÙ„ÙŽ</span> )
+                </span>:
+
+                <span class="pattern-change">
+                                                                        a hamza (                                                                                                <span class="arabic-text green-text drill-answer-text" style="margin:0 4px; display:inline-block;">
+                                £                            </span>
+                                                                                                ) is prefixed before the root                                                            </span>
+
+                <br><br>
+
+            
+                <strong>Form V</strong>
+                <span class="form-pattern-wrap">
+                    ( <span class="arabic-text green-text drill-answer-text">ªÙŽÙÙŽ¹ÙŽÙ‘Ù„ÙŽ</span> )
+                </span>:
+
+                <span class="pattern-change">
+                                                                        <span class="arabic-text green-text drill-answer-text" style="margin:0 4px; display:inline-block;">
+                                ª                            </span>
+                                                                                                 is prefixed AND the middle root letter is doubled (Form II +                                                                                                 <span class="arabic-text green-text drill-answer-text" style="margin:0 4px; display:inline-block;">
+                                ª                            </span>
+                                                                                                )                                                            </span>
+
+                <br><br>
+
+            
+                <strong>Form VIII</strong>
+                <span class="form-pattern-wrap">
+                    ( <span class="arabic-text green-text drill-answer-text">§ÙÙÙ’ªÙŽ¹ÙŽÙ„ÙŽ</span> )
+                </span>:
+
+                <span class="pattern-change">
+                                                                        <span class="arabic-text green-text drill-answer-text" style="margin:0 4px; display:inline-block;">
+                                ª                            </span>
+                                                                                                 is inserted right after the FIRST root letter, with                                                                                                 <span class="arabic-text green-text drill-answer-text" style="margin:0 4px; display:inline-block;">
+                                §Ù                            </span>
+                                                                                                 prefixed before it                                                            </span>
+
+                <br><br>
+
+            
+                <strong>Form X</strong>
+                <span class="form-pattern-wrap">
+                    ( <span class="arabic-text green-text drill-answer-text">§Ù³Ù’ªÙŽÙÙ’¹ÙŽÙ„ÙŽ</span> )
+                </span>:
+
+                <span class="pattern-change">
+                                                                        <span class="arabic-text green-text drill-answer-text" style="margin:0 4px; display:inline-block;">
+                                §Ù³Ù’ªÙŽ                            </span>
+                                                                                                 is prefixed before the root                                                            </span>
+
+                <br><br>
+
+            
+        </div>
+
+        <hr>
+
+        <h2>Study Mode (recommended)</h2>
+        <p>
+            Study Mode will walk you through each Form with examples. After you review a Form
+            you can mark it as "learned" and the practice quiz will focus on Forms you haven't
+            yet marked learned. This helps reinforce the differences between Forms.
+        </p>
+
+        
+        
+        <div class="study-grid">
+            <div class="study-sidebar">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <strong>Examples</strong>
+                    <form method="POST" style="display:inline;">
+                        <button type="submit" name="api_action" value="clear_learned">Clear all</button>
+                    </form>
+                </div>
+                <div class="study-roots">
+                                    <div class="study-root-row">
+                        <a class="root-link" href="?view=study&selected=%D9%83-%D8%AA-%D8%A8#study-practice"><span class="arabic-text">Ùƒ-ª-¨</span></a>
+                        &nbsp;<small>(write)</small>
+                        <div class="forms-list">
+                                                            <span class="form-chip">Form I</span>
+                                                            <span class="form-chip">Form II</span>
+                                                            <span class="form-chip">Form III</span>
+                                                            <span class="form-chip">Form IV</span>
+                                                            <span class="form-chip">Form VIII</span>
+                                                            <span class="form-chip">Form X</span>
+                                                    </div>
+                    </div>
+                                    <div class="study-root-row">
+                        <a class="root-link" href="?view=study&selected=%D8%B9-%D9%84-%D9%85#study-practice"><span class="arabic-text">¹-Ù„-Ù…</span></a>
+                        &nbsp;<small>(know)</small>
+                        <div class="forms-list">
+                                                            <span class="form-chip">Form I</span>
+                                                            <span class="form-chip">Form II</span>
+                                                            <span class="form-chip">Form IV</span>
+                                                            <span class="form-chip">Form V</span>
+                                                    </div>
+                    </div>
+                                    <div class="study-root-row">
+                        <a class="root-link" href="?view=study&selected=%D8%AE-%D8%B1-%D8%AC#study-practice"><span class="arabic-text">®-±-¬</span></a>
+                        &nbsp;<small>(exit)</small>
+                        <div class="forms-list">
+                                                            <span class="form-chip">Form I</span>
+                                                            <span class="form-chip">Form IV</span>
+                                                            <span class="form-chip">Form V</span>
+                                                            <span class="form-chip">Form X</span>
+                                                    </div>
+                    </div>
+                                </div>
+            </div>
+
+            <div id="study-practice" class="study-practice">
+                <h3>Practice</h3>
+                <div class="study-instruction" style="margin-bottom:8px;color:#333;font-weight:600;">Click a root on the left to load a practice question here.</div>
+                <div class="study-practice-meta">Score: 0 / 0</div>
+                                    <p>Select a root from the left to begin practicing. You can mark learned Forms by using the Study list controls.</p>
+                            </div>
+        </div>
+
+        <script>
+        // Mark learned via AJAX to persist in the PHP session so drills can read it server-side
+        (function(){
+            function postAction(action, key){
+                var fd = new FormData();
+                fd.append('api_action', action);
+                if (key) fd.append('key', key);
+                fetch(location.pathname + location.search, { method: 'POST', body: fd }).then(function(res){ return res.json(); }).then(function(json){
+                    if (json && json.learned) {
+                        document.querySelectorAll('.study-row').forEach(function(row){
+                            if (json.learned.indexOf(row.dataset.key) !== -1) row.classList.add('learned');
+                            else row.classList.remove('learned');
+                        });
+                    }
+                }).catch(function(){ alert('Network error'); });
+            }
+            document.querySelectorAll('.mark-learned').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                    var key = this.dataset.key;
+                    postAction('mark_learned', key);
+                });
+            });
+        })();
+        </script>
+
+        <br>
+
+        <div class="lessons-grid">
+
+                
+            <div class="study-info">
+
+                <strong>
+                    <span class="arabic-text">Ùƒ-ª-¨</span>
+                    (write)
+                </strong>
+
+                <br><br>
+
+                
+                    <strong>Form I:</strong>
+                    <span class="arabic-text green-text drill-answer-text">
+                        ÙƒÙŽªÙŽ¨ÙŽ                    </span>
+                    &mdash;
+                    he wrote                    <br>
+
+                
+                    <strong>Form II:</strong>
+                    <span class="arabic-text green-text drill-answer-text">
+                        ÙƒÙŽªÙŽÙ‘¨ÙŽ                    </span>
+                    &mdash;
+                    he had (someone) write / registered                    <br>
+
+                
+                    <strong>Form III:</strong>
+                    <span class="arabic-text green-text drill-answer-text">
+                        ÙƒÙŽ§ªÙŽ¨ÙŽ                    </span>
+                    &mdash;
+                    he corresponded with                    <br>
+
+                
+                    <strong>Form IV:</strong>
+                    <span class="arabic-text green-text drill-answer-text">
+                        £ÙŽÙƒÙ’ªÙŽ¨ÙŽ                    </span>
+                    &mdash;
+                    he dictated                    <br>
+
+                
+                    <strong>Form VIII:</strong>
+                    <span class="arabic-text green-text drill-answer-text">
+                        §ÙÙƒÙ’ªÙŽªÙŽ¨ÙŽ                    </span>
+                    &mdash;
+                    he subscribed/enrolled                    <br>
+
+                
+                    <strong>Form X:</strong>
+                    <span class="arabic-text green-text drill-answer-text">
+                        §Ù³Ù’ªÙŽÙƒÙ’ªÙŽ¨ÙŽ                    </span>
+                    &mdash;
+                    he asked someone to write                    <br>
+
+                
+            </div>
+
+        
+            <div class="study-info">
+
+                <strong>
+                    <span class="arabic-text">¹-Ù„-Ù…</span>
+                    (know)
+                </strong>
+
+                <br><br>
+
+                
+                    <strong>Form I:</strong>
+                    <span class="arabic-text green-text drill-answer-text">
+                        ¹ÙŽÙ„ÙÙ…ÙŽ                    </span>
+                    &mdash;
+                    he knew                    <br>
+
+                
+                    <strong>Form II:</strong>
+                    <span class="arabic-text green-text drill-answer-text">
+                        ¹ÙŽÙ„ÙŽÙ‘Ù…ÙŽ                    </span>
+                    &mdash;
+                    he taught                    <br>
+
+                
+                    <strong>Form IV:</strong>
+                    <span class="arabic-text green-text drill-answer-text">
+                        £ÙŽ¹Ù’Ù„ÙŽÙ…ÙŽ                    </span>
+                    &mdash;
+                    he informed                    <br>
+
+                
+                    <strong>Form V:</strong>
+                    <span class="arabic-text green-text drill-answer-text">
+                        ªÙŽ¹ÙŽÙ„ÙŽÙ‘Ù…ÙŽ                    </span>
+                    &mdash;
+                    he learned                    <br>
+
+                
+            </div>
+
+        
+            <div class="study-info">
+
+                <strong>
+                    <span class="arabic-text">®-±-¬</span>
+                    (exit)
+                </strong>
+
+                <br><br>
+
+                
+                    <strong>Form I:</strong>
+                    <span class="arabic-text green-text drill-answer-text">
+                        ®ÙŽ±ÙŽ¬ÙŽ                    </span>
+                    &mdash;
+                    he went out                    <br>
+
+                
+                    <strong>Form IV:</strong>
+                    <span class="arabic-text green-text drill-answer-text">
+                        £ÙŽ®Ù’±ÙŽ¬ÙŽ                    </span>
+                    &mdash;
+                    he took out / produced                    <br>
+
+                
+                    <strong>Form V:</strong>
+                    <span class="arabic-text green-text drill-answer-text">
+                        ªÙŽ®ÙŽ±ÙŽÙ‘¬ÙŽ                    </span>
+                    &mdash;
+                    he graduated                    <br>
+
+                
+                    <strong>Form X:</strong>
+                    <span class="arabic-text green-text drill-answer-text">
+                        §Ù³Ù’ªÙŽ®Ù’±ÙŽ¬ÙŽ                    </span>
+                    &mdash;
+                    he extracted                    <br>
+
+                
+            </div>
+
+        
+    
+    <br><br>
+
+    <a href="../index.php">
+        &larr; Back to Home
+    </a>
+
+</div>
+</body>
+</html>

@@ -15,6 +15,134 @@
     --topbar-height: 72px;
 }
 
+/* Page container: constrain width to reduce large right whitespace and center content */
+.games-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 12px auto;
+    box-sizing: border-box;
+    padding: 0 12px;
+}
+
+/* Make the concept box center and not full-width so it doesn't leave huge white space */
+.study-info {
+    max-width: 760px;
+    margin: 12px auto;
+}
+
+/* Full width utility for concept blocks that should span the games container */
+.study-info.fullwidth {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 12px 6px;
+}
+
+/* Ensure pattern-change renders inline and keeps arabic characters on the same line */
+.pattern-change { display: inline-block; vertical-align: middle; }
+.pattern-change .arabic-text { display: inline-block; }
+
+
+/* Study pager styles */
+.study-pager { margin: 12px 0 20px; }
+.study-header { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+.progress-bar { flex:1; height:10px; background:#eee; border-radius:6px; overflow:hidden; }
+.progress-fill { height:100%; background:#2ecc71; width:0%; }
+.study-card { border:1px solid #ddd; padding:14px; border-radius:8px; background:#fff; max-width:680px; }
+.study-meta { margin-bottom:8px; font-weight:600; }
+.study-word { font-size:36px; margin:6px 0; }
+.study-meaning { margin-bottom:10px; color:#444; }
+.study-controls button { padding:8px 12px; }
+.study-index { margin-top:8px; color:#666; }
+
+.study-row.learned { opacity:0.6; }
+
+/* Two-column study/practice dashboard */
+.study-grid { display: grid; grid-template-columns: 1fr; gap: 18px; align-items:start; margin-top:12px; }
+.study-sidebar { margin-bottom: 14px; }
+
+/* New: study-wrapper arranges examples and practice side-by-side on wide screens */
+.study-wrapper { display: none; }
+.study-practice-wrap { display: none; }
+
+@media (min-width: 1100px) {
+    .study-wrapper { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; align-items:start; }
+    .study-practice-wrap { display: block; }
+    .lessons-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+}
+.study-sidebar { border:1px solid #e6e6e6; padding:10px; border-radius:8px; background:#fff; }
+.study-root-row { margin-bottom:10px; padding-bottom:8px; border-bottom:1px dashed #eee; }
+.study-root-row.selected { background:#f6fef6; }
+.forms-list { margin-top:6px; }
+.form-chip { display:inline-block; margin:2px 6px 2px 0; padding:4px 8px; background:#f0f0f0; border-radius:16px; font-size:13px; }
+.form-chip.learned { background:#dff6e0; color:#1a6b2d; }
+.root-link { display:inline-block; padding:6px 8px; background:#eef6ff; border-radius:6px; text-decoration:none; color:#006; margin-right:6px; }
+.root-link:hover { background:#def; }
+.study-practice { border:1px solid #e6e6e6; padding:12px; border-radius:8px; background:#f8f8f8; display:block; }
+.study-practice h3 { margin-top:0; }
+.study-feedback { margin:0; padding:0; border:0; background:transparent; }
+
+/* Reduce excessive whitespace inside practice panel */
+.study-practice { padding-bottom: 12px; }
+.study-practice .arabic-text.drill-answer-text { margin: 6px 0; font-size: 36px; text-align:center; display:block; }
+
+/* Tighten spacing inside the practice panel to remove large vertical gaps */
+.study-practice h2.arabic-text { margin: 6px 0 8px; line-height: 1.1; font-size: 40px; }
+.study-practice p { margin: 6px 0; }
+.study-practice label { display: block; margin: 6px 0; }
+.study-practice .study-feedback { margin-bottom: 6px; padding: 0; background: transparent; border: 0; }
+.study-practice .study-feedback .arabic-text { font-size: 28px; margin: 4px 0; line-height: 1.2; text-align: center; display: block; }
+.study-practice .study-instruction { margin-bottom: 6px; }
+.study-practice .quiz-controls { margin-top: 8px; }
+.study-practice .quiz-controls button { margin-right: 8px; }
+
+/* Two-column practice grid: question left, feedback right on wide screens */
+.practice-grid { display: block; }
+.practice-main { width: 100%; }
+.practice-feedback-col { margin-top: 12px; }
+
+.practice-box { border: 1px solid #e6e6e6; padding: 12px; border-radius: 6px; background: #fff; }
+
+
+@media (min-width: 900px) {
+    .practice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: stretch; }
+    .practice-feedback-col { margin-top: 0; display: flex; flex-direction: column; }
+    .practice-main { display: flex; flex-direction: column; }
+    .practice-box { flex: 1 1 auto; display: flex; flex-direction: column; }
+    .results-wrap { flex: 1 1 auto; display: flex; flex-direction: column; }
+    /* ensure inner content doesn't force extra height; make the feedback content scroll if needed */
+    .results-wrap .results-details { overflow: auto; }
+}
+
+.results-wrap { border: 1px solid #e6e6e6; padding: 10px; border-radius: 6px; background: #fff; }
+.results-title { margin-top: 0; margin-bottom: 8px; font-size: 16px; }
+.results-wrap .arabic-text { text-align: center; display: block; }
+.results-wrap .study-feedback { background: transparent !important; padding: 0 !important; border: 0 !important; box-shadow: none !important; }
+/* Safety: remove any inner pale box styling and clear nested element backgrounds */
+.results-wrap .study-feedback, .results-wrap .study-feedback * {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+.study-practice .study-practice-meta { margin-bottom: 8px; }
+.study-practice form { margin-top: 8px; }
+.study-practice .study-instruction { margin-bottom: 6px; }
+.study-practice .study-practice-meta { margin-bottom: 8px; }
+.study-practice h2.arabic-text { margin: 6px 0 12px; }
+
+/* Make practice panel more compact on wide screens by reducing top spacing */
+@media (min-width: 900px) {
+    .study-practice { padding-top: 10px; padding-bottom: 10px; }
+    .study-practice .study-feedback { margin-bottom: 6px; }
+    .study-practice .arabic-text.drill-answer-text { margin-top: 8px; margin-bottom: 8px; }
+}
+.study-practice .quiz-controls { margin-top: 6px; }
+
+/* English translation styling */
+.translation { color: red !important; }
+
 /* For medium/narrow viewports increase the reserved top spacing because
    the header can grow (links, wrapped text, larger font) and we don't
    want the page title or content to be covered. */
@@ -224,10 +352,22 @@ button {
 
 .arabic-text {
     font-family: "Amiri", sans-serif;
-    font-size: 36px;
+    font-size: 36px !important;
     direction: rtl;
     letter-spacing: 0.02em;
     line-height: 1.7;
+    color: green !important;
+}
+
+/* Inline Arabic (smaller) for use inside paragraphs so it doesn't break line height */
+.inline-arabic {
+    font-family: "Amiri", sans-serif;
+    font-size: 20px !important;
+    line-height: 1.2;
+    vertical-align: middle;
+    display: inline-block;
+    color: green !important;
+    margin: 0 6px;
 }
 
 h2.arabic-text {
@@ -263,6 +403,19 @@ input.arabic-text {
     display: inline-block;
     min-width: 150px;
 }
+
+/* Build the Verb game styles */
+.build-verb .mission { font-size: 18px; }
+.build-verb .pieces { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+.build-verb .piece { background: #fff; border:1px solid #ddd; padding:10px 14px; border-radius:6px; font-size:28px; cursor:grab; }
+.build-verb .slots { display:flex; gap:6px; margin: 18px 0; flex-direction:row-reverse; }
+.build-verb .slot { min-width:48px; min-height:48px; border-bottom:2px dashed #ccc; display:flex; align-items:center; justify-content:center; font-size:36px; color: #1b7a1b; }
+.build-verb .piece { font-size:36px; color:#1b7a1b; }
+.build-verb .slot.filled { border-bottom:2px solid #333; }
+.build-verb .controls { margin-top:12px; }
+.build-verb .results-area { margin-top:16px; }
+.build-verb .assembly-anim { margin-top:10px; font-size:36px; color:green; }
+
 
 /* ===============================
    ENGLISH TEXT
@@ -321,7 +474,10 @@ input.arabic-text {
 
     background-color: #f8f8f8;
 
-    display: inline-block;
+    /* Force blocks to fill the available container width to avoid right-side gaps */
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .study-info .arabic-text {
@@ -330,8 +486,9 @@ input.arabic-text {
 
 .lessons-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-    gap: 25px;
+    /* stacked by default; on wide screens each lesson is a card grid */
+    grid-template-columns: 1fr;
+    gap: 20px;
     margin-top: 20px;
 }
 
@@ -345,6 +502,22 @@ input.arabic-text {
 .lesson-card h3 {
     margin-top: 0;
     text-align: center;
+}
+
+/* Forms grid inside each lesson: show form entries side-by-side when space allows */
+.forms-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px 20px;
+    align-items: center;
+}
+.form-block { display: flex; gap: 12px; align-items: center; }
+.form-word { font-size: 28px; }
+.form-meaning { white-space: normal; }
+
+@media (min-width: 900px) {
+    .forms-grid { grid-template-columns: repeat(2, 1fr); }
+    .form-word { font-size: 32px; }
 }
 
 .lesson-stats {
